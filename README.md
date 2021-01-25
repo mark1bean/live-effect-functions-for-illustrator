@@ -18,7 +18,6 @@ Some of the Live Effects functions simply don't work right, probably due to my l
 
 Download the [script files](https://github.com/mark1bean/ai-live-effect-functions/archive/master.zip) and use the LE functions in your own scripts.
 
-> [!IMPORTANT]
 > Each function in `LE_Functions.js` relies on `LE.js`, so you need them both.
 
 
@@ -51,7 +50,6 @@ So calling the function without options, means those defaults will apply.
 LE_InnerGlow(item);
 ```
 
-> [!TIP]
 > Refer to the `defaults` object if you aren't sure what parameters it can take.
 
 To override the defaults, populate an options object with any params you wish, like this:
