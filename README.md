@@ -11,7 +11,7 @@ My aim with these functions is to hide away all that esoteric complication behin
 ---
 ## Important note
 
-Some of the Live Effects simply don't work right. See my notes document.
+Some of the Live Effects functions simply don't work right, probably due to my lack of knowledge. See my [notes document](https://mark1bean.github.io/ai-live-effect-functions/) for the status of each function. Any help or improvements welcome!
 
 ---
 ## Installation
