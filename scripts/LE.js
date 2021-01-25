@@ -8,7 +8,6 @@ var LE = {
     defaultsObject: function (item, defaults, options, func) {
         /* combines defaults and user-specified options along with a little admin work */
         LE.functionName = func.name;
-        if (item == undefined || item.typename == undefined) throw new Error(func.name + ' failed. No item available.');
         try {
             if (defaults == undefined && options == undefined) return {};
             if (defaults == undefined) return options;
@@ -28,9 +27,24 @@ var LE = {
         /* applies the live effect, unless in test mode */
         if (LE.testMode) {
             LE.testResults.push({ timestamp: new Date(), functionName: LE.functionName, xml: xml });
+            return xml;
         } else {
-            item.applyEffect(xml);
-            if (expand) LE.expandAppearance(item);
+            // work out whether item is single item or multiple
+            var items;
+            if (item == undefined) {
+                throw new Error(LE.functionName + ' failed. No item available.');
+            } else if (item[0] == undefined && item.typename != undefined) {
+                // a single item
+                items = [item];
+            }
+            items = item;
+            if (items.length == undefined) throw new Error(LE.functionName + ' failed. Unexpected item type. [1]');
+            // applyEffect to each item
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].typename == undefined) throw new Error(LE.functionName + ' failed. Unexpected item type. [2]');
+                items[i].applyEffect(xml);
+                if (expand) LE.expandAppearance(items[i]);
+            }
             if (LE.debug) $.writeln(LE.functionName + ':\n' + xml);
         }
     },

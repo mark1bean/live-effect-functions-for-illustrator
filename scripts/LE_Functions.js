@@ -66,7 +66,7 @@ function LE_3DEffect(item, options) {
         }
         with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
             var rotationMatrix = mat4RotationFromXYZ(rotXdegrees, rotYdegrees, rotZdegrees);
-            var effectName = ['BevelAndExtrude', '3DRevolve', 'Rotate'][effectType];
+            var effectName = ['Bevel & Extrude', 'Revolve', 'Rotate'][effectType];
             var xml = '<LiveEffect name="Adobe 3D Effect"><Dict data="#matrix I effectStyle #0 R rotX #1 R rotY #2 R rotZ #3 R cameraPerspective #4 R extrudeDepth #5 R surfaceAmbient #6 I shadeMode #7 I surfaceStyle #8 R surfaceMatte #9 R surfaceGloss #10 R blendSteps #11 B preserveSpots #12 B extrudeCap #13 R revolveAngle #14 R revolveOffset #15 B revolveCap #16 I revolveAxisMode #17 R bevelHeight #18 B bevelExtentIn #19 B shadeMaps #20 B showHiddenSurfaces #21 B invisibleGeo #22 I numArtMaps #23 I 3Dversion 2 B paramsDictionaryInitialized 1 I numLights #numLights "><Entry name="shadeColor" valueType="F"><Fill color="#color"/></Entry>#lights<Entry name="DisplayString" value="3D: #display" valueType="S"/></Dict></LiveEffect>'
                 .replace(/#matrix/, xmlFromMat4(rotationMatrix))
                 .replace(/#0/, effectType)
