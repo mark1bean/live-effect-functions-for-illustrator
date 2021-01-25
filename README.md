@@ -3,7 +3,18 @@
 A set of ExtendScript convenience functions for applying Live Effects in Adobe Illustrator.
 
 ---
-## How to install
+## Why these functions?
+The pageItem.applyEffect method is difficult to use. It takes an XML string as its one parameter. And there is no official documentation for what the XMLs needs to contain to achieve the live effect. The knowledge of the XML string has been gleaned over years by many people, and passed on, often through the Adobe community forum. Finding the details can be laborious, and implementation can be a little painful.
+
+My aim with these functions is to hide away all that esoteric complication behind a neat and tidy api.
+
+---
+## Important note
+
+Some of the Live Effects simply don't work right. See my notes document.
+
+---
+## Installation
 
 Download the [script files](https://github.com/mark1bean/ai-live-effect-functions/archive/master.zip) and use the LE functions in your own scripts.
 
@@ -12,7 +23,7 @@ Download the [script files](https://github.com/mark1bean/ai-live-effect-function
 
 
 ---
-## How to call the functions
+## Usage
 
 Every LE function takes two parameters: `item` and `options`.
 
@@ -70,11 +81,18 @@ LE_InnerGlow(item, {opacity: 0.5, blur: 15});
 ```
 
 ---
-## Special features:
+## Expand Appearance
 
 Calling any function with option `expandAppearance: true` will expand the item's appearance (identical to Expand Appearance menu command) immediately after applying the effect.
 
 ---
-## System requirements:
+## System requirements
 
 Adobe Illustrator. As of 2021-01-25, tested only on version 25 (Mac OS 11.1).
+
+---
+## Acknowledgements
+
+Thanks to lots of help and encouragement from CarlosCanto, Silly-V and femkeblanco at [community.adobe.com](https://community.adobe.com)
+
+Thanks to the contributors at [gl-mat4](https://github.com/stackgl/gl-mat4) where I found some excellent 3D matrix functions that saved me a lot of time.
