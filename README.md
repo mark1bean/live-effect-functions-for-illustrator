@@ -6,7 +6,7 @@ A set of ExtendScript convenience functions for applying Live Effects in Adobe I
 ## Why these functions?
 The pageItem.applyEffect method is difficult to use. It takes an XML string as its one parameter. And there is no official documentation for what the XMLs needs to contain to achieve the live effect. The knowledge of the XML string has been gleaned over years by many people, and passed on, often through the Adobe community forum. Finding the details can be laborious, and implementation can be a little painful.
 
-My aim with these functions is to hide away all that esoteric complication behind a neat and tidy api.
+My aim with these functions is to hide away all that esoteric complication behind a neat and tidy api, so to speak.
 
 ---
 ## Important note
@@ -26,7 +26,7 @@ Download the [script files](https://github.com/mark1bean/ai-live-effect-function
 
 Every LE function takes two parameters: `item` and `options`.
 
-`item` is the pageItem to which the Live Effect will apply. The functions will error if no item is supplied.
+`item` is the pageItem (or pageItems!) to which the Live Effect will apply. Accepts a single item or an array (or Illustrator array-like object) of items.
 
 `options` is an object that holds all other parameters. If options is not supplied, the functions will simply use their default settings.
 
@@ -78,10 +78,20 @@ For one or two parameters, inline works well:
 LE_InnerGlow(item, {opacity: 0.5, blur: 15});
 ```
 
+You can supply an array (or Illustrator array-like object) in place of the `item` parameter to apply the effect to multiple items, for example:
+
+```
+LE_InnerGlow(selection);
+```
+
 ---
 ## Expand Appearance
 
 Calling any function with option `expandAppearance: true` will expand the item's appearance (identical to Expand Appearance menu command) immediately after applying the effect.
+
+```
+LE_InnerGlow(item, {blur: 15, expandAppearance: true});
+```
 
 ---
 ## System requirements
