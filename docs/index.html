@@ -10,6 +10,15 @@
             color: #0781a0;
         }
 
+        h1 {
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+        }
+
+        h1 + p {
+            padding-bottom: 20px;
+        }
+
         h5,
         p {
             font-family: Arial, sans-serif;
@@ -46,6 +55,10 @@
             will-change: transform;
         }
 
+        .mainTable tr {
+            height: 42px;
+        }
+
         .mainTable td {
             background-color: #fff;
             border-color: #ccc;
@@ -75,58 +88,84 @@
             margin-left: -4px;
         }
 
-        .mainTable .status0 td {
-            background-color: #e9ff80;
+        .mainTable .status-indicator td:first-child {
+            font-size: 30px;
+            padding: 0px;
+            padding-left: 10px;
+            text-align: center;
         }
 
-        .mainTable .status1 td {
-            background-color: #ffff99;
+        span.status-indicator {
+            position: relative;
+            top: 5px;
+            font-size: 30px;
+            padding-left: 20px;
         }
 
-        .mainTable .status2 td,
-        .mainTable .status3 td {
-            background-color: #dcdcdc;
+        .mainTable .status-indicator.good .symbol,
+        span.good {
+            color: #02940e;
+        }
+
+        .mainTable .status-indicator.half .symbol,
+        span.half {
+            color: #e9ad08;
+        }
+
+        .mainTable .status-indicator.bad .symbol,
+        span.bad {
+            color: #aa2121;
         }
     </style>
 </head>
 
 <body>
+    <h1><a style="text-decoration: none;" href="https://github.com/mark1bean/ai-live-effect-functions">AI Live Effects functions</a></h1>
 
-
+    <p>What worked and what didn't:
+        <span class='status-indicator good'>&checkmark;</span> works fine.
+        <span class='status-indicator half'>&checkmark;</span> works, but not perfectly.
+        <span class='status-indicator bad'>&cross;</span> doesn't work.
+    </p>
     <table class="mainTable" style="width: 100%">
         <colgroup>
-            <!-- <col style="width: 270px"> -->
+            <col style="width: 50px">
             <col style="width: 265px">
             <col style="width: 165px">
             <col style="width: 965px">
         </colgroup>
         <thead>
             <tr>
+                <th></th>
                 <th>Menu Name</th>
                 <th>Function Name</th>
                 <th>Notes</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>3D &gt; Extrude &amp; Bevel</td>
                 <td>LE_3DEffect</td>
                 <td>{ effectType: 0 } <span class="emoji">&#128542;</span> can't handle more than one
                     light. <span class="emoji">&#128542;</span> can't handle bevels.</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>3D &gt; Revolve</td>
                 <td>LE_3DEffect</td>
                 <td>{ effectType: 1 } <span class="emoji">&#128542;</span> can't handle more than one
                     light. <span class="emoji">&#128542;</span> can't handle bevels.</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>3D &gt; Rotate</td>
                 <td>LE_3DEffect</td>
                 <td>{ effectType: 2 } <span class="emoji">&#128542;</span> can't handle more than one
                     light. <span class="emoji">&#128542;</span> can't handle bevels.</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Convert to Shape &gt; Rectangle</td>
                 <td>LE_ConvertToShape</td>
                 <td>{ shapeType: 0 } <span class="emoji">&#128542;</span> disables the fill when
@@ -134,555 +173,666 @@
                     expandAppearance works on
                     geometry</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Convert&nbsp;to&nbsp;Shape&nbsp;&gt; Rounded&nbsp;Rectangle</td>
                 <td>LE_ConvertToShape</td>
-                <td>{ shapeType: 1} <span class="emoji">&#128542;</span> disables the fill when
+                <td>{ shapeType: 1 } <span class="emoji">&#128542;</span> disables the fill when
                     stroke is present (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but
                     expandAppearance works on
                     geometry</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Convert to Shape &gt; Ellipse</td>
                 <td>LE_ConvertToShape</td>
-                <td>{ shapeType: 2} <span class="emoji">&#128542;</span> disables the fill when
+                <td>{ shapeType: 2 } <span class="emoji">&#128542;</span> disables the fill when
                     stroke is present (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but
                     expandAppearance works on
                     geometry</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Crop Marks</td>
                 <td>LE_CropMarks</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Free Distort</td>
                 <td>LE_FreeDistort</td>
                 <td><span class="emoji first">&#128512;</span> for fun, check out the customization:
                     LE_FreeDistort_Random</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Pucker &amp; Bloat</td>
                 <td>LE_PuckerAndBloat</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Roughen</td>
                 <td>LE_Roughen</td>
                 <td><span class="emoji first">&#129315;</span> can accept a Real number for smoothness
                     value!
                 </td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Transform</td>
                 <td>LE_Transform</td>
                 <td></td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Tweak</td>
                 <td>LE_Tweak</td>
                 <td><span class="emoji first">&#128542;</span> fill and stroke have separate tweak
                     effects
                     (<a href="#issue1">issue 1</a>)</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Twist</td>
                 <td>LE_Twist</td>
                 <td><span class="emoji first">&#128542;</span> can cause the path to be wrecked (issue
                     1)</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Zig Zag</td>
                 <td>LE_ZigZag</td>
                 <td><span class="emoji first">&#129315;</span> can accept a Real number for smoothness
                     value!
                 </td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Path &gt; Offset Path</td>
                 <td>LE_OffsetPath</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Path &gt; Outline Object</td>
                 <td>LE_OutlineObject</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Path &gt; Outline Stroke</td>
                 <td>LE_OutlineStroke</td>
                 <td></td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Add</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 0} <span class="emoji">&#128542;</span> fill and stroke are overridden
+                <td>{ command: 0 } <span class="emoji">&#128542;</span> fill and stroke are overridden
                     (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but expandAppearance works on
                     geometry</td>
             </tr>
-            <tr class="status1">
+            <tr class="status-indicator half">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Intersect</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 1} <span class="emoji">&#128542;</span> fill and stroke are overridden
+                <td>{ command: 1 } <span class="emoji">&#128542;</span> fill and stroke are overridden
                     (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but expandAppearance works on
                     geometry</td>
             </tr>
-            <tr class="status2">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pathfinder &gt; Exclude</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 2} <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)</td>
+                <td>{ command: 2 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
+                </td>
             </tr>
-            <tr class="status2">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pathfinder &gt; Subtract</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 3} <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)</td>
+                <td>{ command: 3 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
+                </td>
             </tr>
-            <tr class="status2">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pathfinder &gt; Minus Back</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 4} <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)</td>
+                <td>{ command: 4 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
+                </td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Divide</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 5}</td>
+                <td>{ command: 5 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Outline</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 6}</td>
+                <td>{ command: 6 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Trim</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 7}</td>
+                <td>{ command: 7 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Merge</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 8}</td>
+                <td>{ command: 8 }</td>
             </tr>
-            <tr class="status2">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pathfinder &gt; Crop</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 9} <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)</td>
+                <td>{ command: 9 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
+                </td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Hard Mix</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 10}</td>
+                <td>{ command: 10 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Soft Mix</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 11}</td>
+                <td>{ command: 11 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Trap</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 12}</td>
+                <td>{ command: 12 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Rasterize</td>
                 <td>LE_Rasterize</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; Drop Shadow</td>
                 <td>LE_DropShadow</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; Feather</td>
                 <td>LE_Feather</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; Inner Glow</td>
                 <td>LE_InnerGlow</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; outer Glow</td>
                 <td>LE_OuterGlow</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; Round Corners</td>
                 <td>LE_RoundCorners</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Stylize &gt; Scribble</td>
                 <td>LE_Scribble</td>
                 <td></td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>SVG Filters &gt; ...</td>
                 <td>LE_SVGFilter</td>
                 <td>{ filterName: &lt;&lt;svg filter name&gt;&gt; }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Arc</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 0 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Arc Lower</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 1 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Arc Upper</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 2 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Arch</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 3 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Bulge</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 4 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Shell Lower</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 5 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Shell Upper</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 6 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Flag</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 7 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Wave</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 8 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Fish</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 9 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Rise</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 10 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Fisheye</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 11 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Inflate</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 12 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Squeeze</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 13 }</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Warp &gt; Twist</td>
                 <td>LE_Warp</td>
                 <td>{ warpType: 14 }</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Effect Gallery</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Colored Pencil</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Cutout</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Dry Brush</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Film Grain</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Fresco</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Neon Glow</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Paint Daubs</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Palette Knife</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Plastic Wrap</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Poster Edges</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Rough Pastels</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Smudge Stick</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Sponge</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Underpainting</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Artistic &gt; Watercolor</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status0">
+            <tr class="status-indicator good">
+                <td class="symbol">&checkmark;</td>
                 <td>Blur &gt; Gaussian Blur</td>
                 <td>LE_GaussianBlur</td>
                 <td><span class="emoji first">&#128512;</span> This one works!</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Blur &gt; Radial Blur</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Blur &gt; Smart Blur</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Accented Edges</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Angled Strokes</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Crosshatch</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Dark Strokes</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Ink Outlines</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Spatter</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Sprayed Strokes</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Brush Strokes &gt; Sumi-e</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Distort &gt; Diffuse Glow</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Distort &gt; Glass</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Distort &gt; Ocean Ripple</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
-                <td>Pixelate &gt; Color Halftone</td>
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
+                <td>Pixelate &gt; Color badtone</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pixelate &gt; Crystallize</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pixelate &gt; Mezzotint</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Pixelate &gt; Pointillize</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sharpen &gt; Unsharp Mask</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Bas Relief</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Chalk &amp; Charcoal</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Charcoal</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Chrome</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Cont&eacute; Crayon</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Graphic Pen</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
-                <td>Sketch &gt; Halftone Pattern</td>
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
+                <td>Sketch &gt; badtone Pattern</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Note Paper</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Photocopy</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Plaster</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Reticulation</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Stamp</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Torn Edges</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Sketch &gt; Water Paper</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Stylize &gt; Glowing Edges</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Craquelure</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Grain</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Mosaic Tiles</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Patchwork</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Stained Glass</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Texture &gt; Texturizer</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Video &gt; De-Interlace</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
             </tr>
-            <tr class="status3">
+            <tr class="status-indicator bad">
+                <td class="symbol">&cross;</td>
                 <td>Video &gt; NTSC Colors</td>
                 <td>&mdash;</td>
                 <td><span class="emoji first">&#129488;</span> Nope (<a href="#issue2">issue 2</a>)</td>
@@ -693,7 +843,7 @@
         <h5 id="issue1">Issue 1:</h5>
         <p>The applyEffect() method puts the live effect at the <em>end</em> of the Appearance, after the
             stroke and fill.
-            However some effects need to be placed at the <em>beginning</em>>, before the stroke and fill. In other
+            However some effects need to be placed at the <em>beginning</em>, before the stroke and fill. In other
             respects the live effect is correctly applied, so that manually moving it from the bottom to the top of the
             Appearance Panel resolves the problem completely. Sadly, this makes automation useless!</p>
         <h5 id="issue2">Issue 2:</h5>
@@ -703,6 +853,9 @@
             method's XML.</p>
         <p>(I haven't tried every single one of the filters that I've marked with Issue 2. Just the ones I wanted, eg.
             Radial Blur.)</p>
+    </div>
+    <div>
+        <p><a href="https://github.com/mark1bean/ai-live-effect-functions">Return to github repo.</a></p>
     </div>
 </body>
 
