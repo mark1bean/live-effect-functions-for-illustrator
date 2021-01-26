@@ -4,7 +4,7 @@ A set of ExtendScript convenience functions for applying Live Effects in Adobe I
 
 ---
 ## Why these functions?
-The pageItem.applyEffect method is difficult to use. It takes an XML string as its one parameter. And there is no official documentation for what the XMLs needs to contain to achieve the live effect. The knowledge of the XML string has been gleaned over years by many people, and passed on, often through the Adobe community forum. Finding the details can be laborious, and implementation can be a little painful.
+The pageItem.applyEffect method is difficult to use. It takes an XML string as its one parameter, for which there is no official documentation. The knowledge of the XML string has been gleaned over years by many people, and passed on, often through the Adobe community forum. Finding the details can be laborious, and implementation can be a little painful.
 
 My aim with these functions is to hide away all that esoteric complication behind a neat and tidy api, so to speak.
 
@@ -18,7 +18,7 @@ Some of the Live Effects functions simply don't work right, probably due to my l
 
 Download the [script files](https://github.com/mark1bean/ai-live-effect-functions/archive/master.zip) and use the LE functions in your own scripts.
 
-> Each function in `LE_Functions.js` relies on `LE.js`, so you need them both.
+> Each function in `LE_Functions.js` relies on `LE.js`, so you'll need both files.
 
 
 ---
@@ -26,7 +26,7 @@ Download the [script files](https://github.com/mark1bean/ai-live-effect-function
 
 Every LE function takes two parameters: `item` and `options`.
 
-`item` is the pageItem (or pageItems!) to which the Live Effect will apply. Accepts a single item or an array (or Illustrator array-like object) of items.
+`item` is the pageItem (or pageItems!) to which the Live Effect will apply. Can be a single pageItem, or an array of pageItems, or an Illustrator array-like object, eg pageItems.
 
 `options` is an object that holds all other parameters. If options is not supplied, the functions will simply use their default settings.
 
@@ -44,7 +44,7 @@ var defaults = {
 }
 ```
 
-So calling the function without options, means those defaults will apply.
+So calling the function without supplying `options`, means those defaults will apply.
 
 ```
 LE_InnerGlow(item);
@@ -52,7 +52,7 @@ LE_InnerGlow(item);
 
 > Refer to the `defaults` object if you aren't sure what parameters it can take.
 
-To override the defaults, populate an options object with any params you wish, like this:
+To override the defaults, populate an `options` object with any params you wish, like this:
 
 ```
 var myOptions = {
