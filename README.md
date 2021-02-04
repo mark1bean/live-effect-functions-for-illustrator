@@ -96,7 +96,7 @@ LE_InnerGlow(item, {blur: 15, expandAppearance: true});
 ---
 ## System requirements
 
-Adobe Illustrator. As of 2021-01-25, tested only on version 25 (Mac OS 11.1).
+Adobe Illustrator CS6 and above. As of 2021-01-25, tested only on version 25 (Mac OS 11.1).
 
 ---
 ## Acknowledgements
