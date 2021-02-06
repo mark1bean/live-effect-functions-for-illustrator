@@ -91,7 +91,8 @@ function LE_DemonstrateTests() {
     if (testList == undefined) throw new Error('LE_DemonstrateTests: testList not found.');
     var testItem = app.activeDocument.selection[0];
     if (testItem == undefined) throw new Error('LE_DemonstrateTests: no item selected.');
-    for (var i = 0; i < testList.length; i++) {
+    var doContinue;
+    for (var i = 1; i < testList.length; i++) {
         testList[i].func(testItem);
         app.redraw();
         doContinue = confirm('(' + i + ')' + testList[i].func.toString());

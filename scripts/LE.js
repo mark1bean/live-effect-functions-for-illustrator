@@ -37,7 +37,6 @@ var LE = {
                 // a single item
                 items = [item];
             }
-            items = item;
             if (items.length == undefined) throw new Error(LE.functionName + ' failed. Unexpected item type. [1]');
             // applyEffect to each item
             for (var i = 0; i < items.length; i++) {
