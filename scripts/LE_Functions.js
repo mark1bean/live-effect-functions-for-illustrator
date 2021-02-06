@@ -64,41 +64,40 @@ function LE_3DEffect(item, options) {
             numArtMaps: 0,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var rotationMatrix = mat4RotationFromXYZ(rotXdegrees, rotYdegrees, rotZdegrees);
-            var effectName = ['Bevel & Extrude', 'Revolve', 'Rotate'][effectType];
-            var xml = '<LiveEffect name="Adobe 3D Effect"><Dict data="#matrix I effectStyle #0 R rotX #1 R rotY #2 R rotZ #3 R cameraPerspective #4 R extrudeDepth #5 R surfaceAmbient #6 I shadeMode #7 I surfaceStyle #8 R surfaceMatte #9 R surfaceGloss #10 R blendSteps #11 B preserveSpots #12 B extrudeCap #13 R revolveAngle #14 R revolveOffset #15 B revolveCap #16 I revolveAxisMode #17 R bevelHeight #18 B bevelExtentIn #19 B shadeMaps #20 B showHiddenSurfaces #21 B invisibleGeo #22 I numArtMaps #23 I 3Dversion 2 B paramsDictionaryInitialized 1 I numLights #numLights "><Entry name="shadeColor" valueType="F"><Fill color="#color"/></Entry>#lights<Entry name="DisplayString" value="3D: #display" valueType="S"/></Dict></LiveEffect>'
-                .replace(/#matrix/, xmlFromMat4(rotationMatrix))
-                .replace(/#0/, effectType)
-                .replace(/#1/, rotXdegrees)
-                .replace(/#2/, rotYdegrees)
-                .replace(/#3/, rotZdegrees)
-                .replace(/#4/, cameraPerspective)
-                .replace(/#5/, extrudeDepthPts)
-                .replace(/#6/, ambientLight)
-                .replace(/#7/, shadeMode)
-                .replace(/#8/, surfaceStyle)
-                .replace(/#9/, 100 - highlightIntensity)
-                .replace(/#10/, 100 - highlightSizePercent)
-                .replace(/#11/, blendSteps)
-                .replace(/#12/, preserveSpots ? 1 : 0)
-                .replace(/#13/, extrudeCap ? 1 : 0)
-                .replace(/#14/, revolveAngle)
-                .replace(/#15/, revolveOffset)
-                .replace(/#16/, revolveCap ? 1 : 0)
-                .replace(/#17/, revolveAxisMode)
-                .replace(/#18/, bevelHeightPts)
-                .replace(/#19/, bevelExtentIn ? 1 : 0)
-                .replace(/#20/, shadeMaps)
-                .replace(/#21/, showHiddenSurfaces ? 1 : 0)
-                .replace(/#22/, invisibleGeo ? 1 : 0)
-                .replace(/#23/, numArtMaps)
-                .replace(/#numLights/, lights.length)
-                .replace(/#lights/, xmlFromLights(lights))
-                .replace(/#color/, LE.formatColor(shadingColor))
-                .replace(/#display/, effectName);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee);
+        o.rotationMatrix = mat4RotationFromXYZ(o.rotXdegrees, o.rotYdegrees, o.rotZdegrees);
+        o.effectName = ['Bevel & Extrude', 'Revolve', 'Rotate'][o.effectType];
+        var xml = '<LiveEffect name="Adobe 3D Effect"><Dict data="#matrix I effectStyle #0 R rotX #1 R rotY #2 R rotZ #3 R cameraPerspective #4 R extrudeDepth #5 R surfaceAmbient #6 I shadeMode #7 I surfaceStyle #8 R surfaceMatte #9 R surfaceGloss #10 R blendSteps #11 B preserveSpots #12 B extrudeCap #13 R revolveAngle #14 R revolveOffset #15 B revolveCap #16 I revolveAxisMode #17 R bevelHeight #18 B bevelExtentIn #19 B shadeMaps #20 B showHiddenSurfaces #21 B invisibleGeo #22 I numArtMaps #23 I 3Dversion 2 B paramsDictionaryInitialized 1 I numLights #numLights "><Entry name="shadeColor" valueType="F"><Fill color="#color"/></Entry>#lights<Entry name="DisplayString" value="3D: #display" valueType="S"/></Dict></LiveEffect>'
+            .replace(/#matrix/, xmlFromMat4(o.rotationMatrix))
+            .replace(/#0/, o.effectType)
+            .replace(/#1/, o.rotXdegrees)
+            .replace(/#2/, o.rotYdegrees)
+            .replace(/#3/, o.rotZdegrees)
+            .replace(/#4/, o.cameraPerspective)
+            .replace(/#5/, o.extrudeDepthPts)
+            .replace(/#6/, o.ambientLight)
+            .replace(/#7/, o.shadeMode)
+            .replace(/#8/, o.surfaceStyle)
+            .replace(/#9/, 100 - o.highlightIntensity)
+            .replace(/#10/, 100 - o.highlightSizePercent)
+            .replace(/#11/, o.blendSteps)
+            .replace(/#12/, o.preserveSpots ? 1 : 0)
+            .replace(/#13/, o.extrudeCap ? 1 : 0)
+            .replace(/#14/, o.revolveAngle)
+            .replace(/#15/, o.revolveOffset)
+            .replace(/#16/, o.revolveCap ? 1 : 0)
+            .replace(/#17/, o.revolveAxisMode)
+            .replace(/#18/, o.bevelHeightPts)
+            .replace(/#19/, o.bevelExtentIn ? 1 : 0)
+            .replace(/#20/, o.shadeMaps)
+            .replace(/#21/, o.showHiddenSurfaces ? 1 : 0)
+            .replace(/#22/, o.invisibleGeo ? 1 : 0)
+            .replace(/#23/, o.numArtMaps)
+            .replace(/#numLights/, o.lights.length)
+            .replace(/#lights/, xmlFromLights(o.lights))
+            .replace(/#color/, LE.formatColor(o.shadingColor))
+            .replace(/#display/, o.effectName);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -265,23 +264,22 @@ function LE_ConvertToShape(item, options) {
             cornerRadiusPts: 9,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var shapeName = ['Rectangle', 'RoundedRectangle', 'Ellipse'][shapeType];
-            if (absoluteness == true || absoluteness > 0) {
-                widthPts = widthPts || 100;
-                heightPts = heightPts || 100;
-            }
-            var xml = '<LiveEffect name="Adobe Shape Effects"><Dict data="U DisplayString #1 I Shape #2 R RelWidth #3 R RelHeight #4 R AbsWidth #5 R AbsHeight #6 R Absolute #7 R CornerRadius #8 "/></LiveEffect>'
-                .replace(/#1/, shapeName)
-                .replace(/#2/, shapeType)
-                .replace(/#3/, widthPts)
-                .replace(/#4/, heightPts)
-                .replace(/#5/, widthPts)
-                .replace(/#6/, heightPts)
-                .replace(/#7/, Number(absoluteness))
-                .replace(/#8/, cornerRadiusPts);
-            LE.applyEffect(item, xml, expandAppearance);
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        o.shapeName = ['Rectangle', 'RoundedRectangle', 'Ellipse'][o.shapeType];
+        if (o.absoluteness == true || o.absoluteness > 0) {
+            o.widthPts = o.widthPts || 100;
+            o.heightPts = o.heightPts || 100;
         }
+        var xml = '<LiveEffect name="Adobe Shape Effects"><Dict data="U DisplayString #1 I Shape #2 R RelWidth #3 R RelHeight #4 R AbsWidth #5 R AbsHeight #6 R Absolute #7 R CornerRadius #8 "/></LiveEffect>'
+            .replace(/#1/, o.shapeName)
+            .replace(/#2/, o.shapeType)
+            .replace(/#3/, o.widthPts)
+            .replace(/#4/, o.heightPts)
+            .replace(/#5/, o.widthPts)
+            .replace(/#6/, o.heightPts)
+            .replace(/#7/, Number(o.absoluteness))
+            .replace(/#8/, o.cornerRadiusPts);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -295,11 +293,10 @@ function LE_CropMarks(item, options) {
             style: 0,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Trim Marks"><Dict data="I styl #1 "/></LiveEffect>'
-                .replace(/#1/, style);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Trim Marks"><Dict data="I styl #1 "/></LiveEffect>'
+            .replace(/#1/, o.style);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -321,20 +318,19 @@ function LE_DropShadow(item, options) {
             shadowColor: [0, 0, 0],  /* RGB Black; also accepts [C,M,Y,K], [R,G,B] or [K] */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Drop Shadow"><Dict data="I blnd #1 R opac #2 R horz #3 R vert #4 R blur #5 B usePSLBlur #6 I csrc #7 R dark #8 B pair #9 "><Entry name="sclr" valueType="F"><Fill color="#10"/></Entry></Dict></LiveEffect>'
-                .replace(/#1/, blendMode)
-                .replace(/#2/, opacity)
-                .replace(/#3/, horzOffsetPts)
-                .replace(/#4/, vertOffsetPts)
-                .replace(/#5/, blur)
-                .replace(/#6/, usePSLBlur ? 1 : 0)
-                .replace(/#7/, useDarkness ? 1 : 0)
-                .replace(/#8/, darkness)
-                .replace(/#9/, pair ? 1 : 0)
-                .replace(/#10/, LE.formatColor(shadowColor));
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Drop Shadow"><Dict data="I blnd #1 R opac #2 R horz #3 R vert #4 R blur #5 B usePSLBlur #6 I csrc #7 R dark #8 B pair #9 "><Entry name="sclr" valueType="F"><Fill color="#10"/></Entry></Dict></LiveEffect>'
+            .replace(/#1/, o.blendMode)
+            .replace(/#2/, o.opacity)
+            .replace(/#3/, o.horzOffsetPts)
+            .replace(/#4/, o.vertOffsetPts)
+            .replace(/#5/, o.blur)
+            .replace(/#6/, o.usePSLBlur ? 1 : 0)
+            .replace(/#7/, o.useDarkness ? 1 : 0)
+            .replace(/#8/, o.darkness)
+            .replace(/#9/, o.pair ? 1 : 0)
+            .replace(/#10/, LE.formatColor(o.shadowColor));
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -347,11 +343,10 @@ function LE_Feather(item, options) {
             radius: 10,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Fuzzy Mask"><Dict data="R Radius #1 "/></LiveEffect>'
-                .replace(/#1/, radius);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Fuzzy Mask"><Dict data="R Radius #1 "/></LiveEffect>'
+            .replace(/#1/, o.radius);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -387,26 +382,25 @@ function LE_FreeDistort(item, options) {
             sourceRect: [[0, 0], [1, 0], [0, 1], [1, 1]], /* Note: problably never need to specify sourceRect */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Free Distort"><Dict data="R src0h #1 R src0v #2 R src1h #3 R src1v #4 R src2h #5 R src2v #6 R src3h #7 R src3v #8 R dst0h #9 R dst0v #10 R dst1h #11 R dst1v #12 R dst2h #13 R dst2v #14 R dst3h #15 R dst3v #16 "/></LiveEffect>'
-                .replace(/#1/, sourceRect[0][0])
-                .replace(/#2/, -sourceRect[0][1])
-                .replace(/#3/, sourceRect[1][0])
-                .replace(/#4/, -sourceRect[1][1])
-                .replace(/#5/, sourceRect[2][0])
-                .replace(/#6/, -sourceRect[2][1])
-                .replace(/#7/, sourceRect[3][0])
-                .replace(/#8/, -sourceRect[3][1])
-                .replace(/#9/, distortRect[0][0])
-                .replace(/#10/, -distortRect[0][1])
-                .replace(/#11/, distortRect[1][0])
-                .replace(/#12/, -distortRect[1][1])
-                .replace(/#13/, distortRect[2][0])
-                .replace(/#14/, -distortRect[2][1])
-                .replace(/#15/, distortRect[3][0])
-                .replace(/#16/, -distortRect[3][1]);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Free o.Distort"><Dict data="R src0h #1 R src0v #2 R src1h #3 R src1v #4 R src2h #5 R src2v #6 R src3h #7 R src3v #8 R dst0h #9 R dst0v #10 R dst1h #11 R dst1v #12 R dst2h #13 R dst2v #14 R dst3h #15 R dst3v #16 "/></LiveEffect>'
+            .replace(/#1/, o.sourceRect[0][0])
+            .replace(/#2/, -o.sourceRect[0][1])
+            .replace(/#3/, o.sourceRect[1][0])
+            .replace(/#4/, -o.sourceRect[1][1])
+            .replace(/#5/, o.sourceRect[2][0])
+            .replace(/#6/, -o.sourceRect[2][1])
+            .replace(/#7/, o.sourceRect[3][0])
+            .replace(/#8/, -o.sourceRect[3][1])
+            .replace(/#9/, o.distortRect[0][0])
+            .replace(/#10/, -o.distortRect[0][1])
+            .replace(/#11/, o.distortRect[1][0])
+            .replace(/#12/, -o.distortRect[1][1])
+            .replace(/#13/, o.distortRect[2][0])
+            .replace(/#14/, -o.distortRect[2][1])
+            .replace(/#15/, o.distortRect[3][0])
+            .replace(/#16/, -o.distortRect[3][1]);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -419,11 +413,10 @@ function LE_GaussianBlur(item, options) {
             blur: 10,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe PSL Gaussian Blur"><Dict data="R PrevDocScale 1 I PrevDres 300 R blur #1 "></Dict></LiveEffect>'
-                .replace(/#1/, blur);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe PSL Gaussian Blur"><Dict data="R PrevDocScale 1 I PrevDres 300 R blur #1 "></Dict></LiveEffect>'
+            .replace(/#1/, o.blur);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -440,15 +433,14 @@ function LE_InnerGlow(item, options) {
             glowColor: [255, 255, 255],  /* RGB White; also accepts [C,M,Y,K], [R,G,B] or [K] */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Inner Glow"><Dict data="I blnd #1 I gtyp #2 R opac #3 R blur #4 "><Entry name="gclr" valueType="F"><Fill color="#5 "/></Entry></Dict></LiveEffect>'
-                .replace(/#1/, blendMode)
-                .replace(/#2/, glowType)
-                .replace(/#3/, opacity)
-                .replace(/#4/, blur)
-                .replace(/#5/, LE.formatColor(glowColor));
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Inner Glow"><Dict data="I blnd #1 I gtyp #2 R opac #3 R blur #4 "><Entry name="gclr" valueType="F"><Fill color="#5 "/></Entry></Dict></LiveEffect>'
+            .replace(/#1/, o.blendMode)
+            .replace(/#2/, o.glowType)
+            .replace(/#3/, o.opacity)
+            .replace(/#4/, o.blur)
+            .replace(/#5/, LE.formatColor(o.glowColor));
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -463,13 +455,12 @@ function LE_OffsetPath(item, options) {
             miterLimit: 4,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Offset Path"><Dict data="R ofst #1 I jntp #2 R mlim #3 "/></LiveEffect>'
-                .replace(/#1/, offset)
-                .replace(/#2/, joinType)
-                .replace(/#3/, miterLimit);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Offset Path"><Dict data="R ofst #1 I jntp #2 R mlim #3 "/></LiveEffect>'
+            .replace(/#1/, o.offset)
+            .replace(/#2/, o.joinType)
+            .replace(/#3/, o.miterLimit);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -486,15 +477,14 @@ function LE_OuterGlow(item, options) {
             usePSLBlur: true,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Outer Glow"><Dict data="I blnd #1 R opac #2 R blur #3 B usePSLBlur #4 "><Entry name="sclr" valueType="F"><Fill color="#5 "/></Entry></Dict></LiveEffect>'
-                .replace(/#1/, blendMode)
-                .replace(/#2/, opacity)
-                .replace(/#3/, blur)
-                .replace(/#4/, usePSLBlur ? 1 : 0)
-                .replace(/#5/, LE.formatColor(shadowColor));
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Outer Glow"><Dict data="I blnd #1 R opac #2 R blur #3 B usePSLBlur #4 "><Entry name="sclr" valueType="F"><Fill color="#5 "/></Entry></Dict></LiveEffect>'
+            .replace(/#1/, o.blendMode)
+            .replace(/#2/, o.opacity)
+            .replace(/#3/, o.blur)
+            .replace(/#4/, o.usePSLBlur ? 1 : 0)
+            .replace(/#5/, LE.formatColor(shadowColor));
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -506,10 +496,9 @@ function LE_OutlineObject(item, options) {
         var defaults = {
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Outline Type"><Dict data=" "/></LiveEffect>';
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Outline Type"><Dict data=" "/></LiveEffect>';
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -521,10 +510,9 @@ function LE_OutlineStroke(item, options) {
         var defaults = {
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Outline Stroke"><Dict data=" "/></LiveEffect>';
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Outline Stroke"><Dict data=" "/></LiveEffect>';
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -560,25 +548,24 @@ function LE_PathFinder(item, options) {
             trapTintTolerance: 0.05,    /* trap command only */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var display = ['Add', 'Intersect', 'Exclude', 'Minus Front', 'Minus Back', 'Divide', 'Outline', 'Trim', 'Merge', 'Crop', 'Hard Mix', 'Soft Mix', 'Trap'][command];
-            var xml = '<LiveEffect name="Adobe Pathfinder"><Dict data="I Command #1 B ConvertCustom #2 B ExtractUnpainted #3 R Mix #4 R Precision #5 B RemovePoints #6 R TrapAspect #7 B TrapConvertCustom #8 R TrapMaxTint #9 B TrapReverse #10 R TrapThickness #11 R TrapTint #12 R TrapTintTolerance #13"><Entry name="DisplayString" value="#14" valueType="S"/></Dict></LiveEffect>'
-                .replace(/#1/, command)
-                .replace(/#2/, convertCustom ? 1 : 0)
-                .replace(/#3/, removeUnpainted ? 1 : 0)
-                .replace(/#4/, mix)
-                .replace(/#5/, precision)
-                .replace(/#6/, removePoints ? 1 : 0)
-                .replace(/#7/, trapAspect)
-                .replace(/#8/, trapConvertCustom ? 1 : 0)
-                .replace(/#9/, trapMaxTint)
-                .replace(/#10/, trapReverse ? 1 : 0)
-                .replace(/#11/, trapThickness)
-                .replace(/#12/, trapTint)
-                .replace(/#13/, trapTintTolerance)
-                .replace(/#14/, display);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        o.display = ['Add', 'Intersect', 'Exclude', 'Minus Front', 'Minus Back', 'Divide', 'Outline', 'Trim', 'Merge', 'Crop', 'Hard Mix', 'Soft Mix', 'Trap'][o.command];
+        var xml = '<LiveEffect name="Adobe Pathfinder"><Dict data="I Command #1 B ConvertCustom #2 B ExtractUnpainted #3 R Mix #4 R Precision #5 B RemovePoints #6 R TrapAspect #7 B TrapConvertCustom #8 R TrapMaxTint #9 B TrapReverse #10 R TrapThickness #11 R TrapTint #12 R TrapTintTolerance #13"><Entry name="DisplayString" value="#14" valueType="S"/></Dict></LiveEffect>'
+            .replace(/#1/, o.command)
+            .replace(/#2/, o.convertCustom ? 1 : 0)
+            .replace(/#3/, o.removeUnpainted ? 1 : 0)
+            .replace(/#4/, o.mix)
+            .replace(/#5/, o.precision)
+            .replace(/#6/, o.removePoints ? 1 : 0)
+            .replace(/#7/, o.trapAspect)
+            .replace(/#8/, o.trapConvertCustom ? 1 : 0)
+            .replace(/#9/, o.trapMaxTint)
+            .replace(/#10/, o.trapReverse ? 1 : 0)
+            .replace(/#11/, o.trapThickness)
+            .replace(/#12/, o.trapTint)
+            .replace(/#13/, o.trapTintTolerance)
+            .replace(/#14/, o.display);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -591,11 +578,10 @@ function LE_PuckerAndBloat(item, options) {
             value: 50,              /* -200...200 */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Punk and Bloat"><Dict data="R d_factor #1 "/></LiveEffect>'
-                .replace(/#1/, Number(value));
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Punk and Bloat"><Dict data="R d_factor #1 "/></LiveEffect>'
+            .replace(/#1/, Number(o.value));
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -613,16 +599,15 @@ function LE_Rasterize(item, options) {
             clipMask: false,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Rasterize"><Dict data="I colr #1 B alis #2 I dpi. #3 B mask #4 R padd #5 I optn #6 "/></LiveEffect>'
-                .replace(/#1/, colorType + (transparentBackground ? 4 : 0))
-                .replace(/#2/, antialiasType > 0 ? 1 : 0)
-                .replace(/#3/, Math.round(dpi))
-                .replace(/#4/, clipMask ? 1 : 0)
-                .replace(/#5/, paddingInPts)
-                .replace(/#6/, antialiasType == 2 ? 16 : 0);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Rasterize"><Dict data="I colr #1 B alis #2 I dpi. #3 B mask #4 R padd #5 I optn #6 "/></LiveEffect>'
+            .replace(/#1/, o.colorType + (o.transparentBackground ? 4 : 0))
+            .replace(/#2/, o.antialiasType > 0 ? 1 : 0)
+            .replace(/#3/, Math.round(o.dpi))
+            .replace(/#4/, o.clipMask ? 1 : 0)
+            .replace(/#5/, o.paddingInPts)
+            .replace(/#6/, o.antialiasType == 2 ? 16 : 0);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -638,15 +623,14 @@ function LE_Roughen(item, options) {
             smoothness: 0,         /* 0 = corners, 1 = smooth, 0.5 = halfway, 1.5 = too much? */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Roughen"><Dict data="R asiz #1 R size #2 R absoluteness #3 R dtal #4 R roundness #5 "/></LiveEffect>'
-                .replace(/#1/, amount)
-                .replace(/#2/, amount)
-                .replace(/#3/, Number(absoluteness))
-                .replace(/#4/, segmentsPerInch)
-                .replace(/#5/, smoothness);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Roughen"><Dict data="R asiz #1 R size #2 R absoluteness #3 R dtal #4 R roundness #5 "/></LiveEffect>'
+            .replace(/#1/, o.amount)
+            .replace(/#2/, o.amount)
+            .replace(/#3/, Number(o.absoluteness))
+            .replace(/#4/, o.segmentsPerInch)
+            .replace(/#5/, o.smoothness);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -659,11 +643,10 @@ function LE_RoundCorners(item, options) {
             radius: 10,   /* pts */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Round Corners"><Dict data="R radius #1 "/></LiveEffect>'
-                .replace(/#1/, radius);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Round Corners"><Dict data="R radius #1 "/></LiveEffect>'
+            .replace(/#1/, o.radius);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -683,18 +666,17 @@ function LE_Scribble(item, options) {
             spacingVariation: 0.5,   /* spacingVariation (0-1000pts) */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            xml = '<LiveEffect name="Adobe Scribble Fill"><Dict data="R Spacing #7 R Angle #1 R Scribbliness #5 R StrokeWidth #4 R EdgeOverlap #2 R ScribbleVariation #6 R SpacingVariation #8 R EdgeOverlapVariation #3"/></LiveEffect>'
-                .replace(/#1/, angle)
-                .replace(/#2/, pathOverlap)
-                .replace(/#3/, pathOverlapVariation)
-                .replace(/#4/, strokeWidth)
-                .replace(/#5/, curviness / 100)
-                .replace(/#6/, curvinessVariation / 100)
-                .replace(/#7/, spacing)
-                .replace(/#8/, spacingVariation);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee);
+        var xml = '<LiveEffect name="Adobe Scribble Fill"><Dict data="R Spacing #7 R Angle #1 R Scribbliness #5 R StrokeWidth #4 R EdgeOverlap #2 R ScribbleVariation #6 R SpacingVariation #8 R EdgeOverlapVariation #3"/></LiveEffect>'
+            .replace(/#1/, o.angle)
+            .replace(/#2/, o.pathOverlap)
+            .replace(/#3/, o.pathOverlapVariation)
+            .replace(/#4/, o.strokeWidth)
+            .replace(/#5/, o.curviness / 100)
+            .replace(/#6/, o.curvinessVariation / 100)
+            .replace(/#7/, o.spacing)
+            .replace(/#8/, o.spacingVariation);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -715,12 +697,11 @@ function LE_SVGFilter(item, options) {
             filterName: 'AI_Alpha_4',   /* must match the name of a filter that exists in the document */
             expandAppearance: false
         };
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe SVG Filter Effect"><Dict data=""><Entry name="SVGFilterUIDName" value="#1" valueType="S"/><Entry name="DisplayString" value="#2" valueType="S"/></Dict></LiveEffect>'
-                .replace(/#1/, filterName)
-                .replace(/#2/, filterName);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe SVG Filter Effect"><Dict data=""><Entry name="SVGFilterUIDName" value="#1" valueType="S"/><Entry name="DisplayString" value="#2" valueType="S"/></Dict></LiveEffect>'
+            .replace(/#1/, o.filterName)
+            .replace(/#2/, o.filterName);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -745,31 +726,32 @@ function LE_Transform(item, options) {
             reflectY: false,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            for (var i = 0; i < LE.transformPoints.length; i++) {
-                if (transformPoint === LE.transformPoints[i]) {
-                    transformPoint = i;
-                }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        o.transformIndex = 4;
+        for (var i = 0; i < LE.transformPoints.length; i++) {
+            if (o.transformPoint === LE.transformPoints[i]) {
+                o.transformPointIndex = i;
+                break;
             }
-            var xml = '<LiveEffect name="Adobe Transform"><Dict data="R scaleH_Percent #1 R scaleV_Percent #2 R scaleH_Factor #3 R scaleV_Factor #4 R moveH_Pts #5 R moveV_Pts #6 R rotate_Degrees #7 R rotate_Radians #8 I numCopies #9 I pinPoint #10 B scaleLines #11 B transformPatterns #12 B transformObjects #13 B reflectX #14 B reflectY #15 B randomize #16 "/></LiveEffect>'
-                .replace(/#1/, scaleHorzPercent)
-                .replace(/#2/, scaleVertPercent)
-                .replace(/#3/, scaleHorzPercent / 100)
-                .replace(/#4/, scaleVertPercent / 100)
-                .replace(/#5/, moveHorzPts)
-                .replace(/#6/, -moveVertPts)
-                .replace(/#7/, rotateDegrees)
-                .replace(/#8/, rotateDegrees * Math.PI / 180)
-                .replace(/#9/, numberOfCopies)
-                .replace(/#10/, transformPoint)
-                .replace(/#11/, scaleStrokes ? 1 : 0)
-                .replace(/#12/, transformPatterns ? 1 : 0)
-                .replace(/#13/, transformObjects ? 1 : 0)
-                .replace(/#14/, reflectX ? 1 : 0)
-                .replace(/#15/, reflectY ? 1 : 0)
-                .replace(/#16/, randomize ? 1 : 0);
-            LE.applyEffect(item, xml, expandAppearance);
         }
+        var xml = '<LiveEffect name="Adobe Transform"><Dict data="R scaleH_Percent #1 R scaleV_Percent #2 R scaleH_Factor #3 R scaleV_Factor #4 R moveH_Pts #5 R moveV_Pts #6 R rotate_Degrees #7 R rotate_Radians #8 I numCopies #9 I pinPoint #10 B scaleLines #11 B transformPatterns #12 B transformObjects #13 B reflectX #14 B reflectY #15 B randomize #16 "/></LiveEffect>'
+            .replace(/#1/, o.scaleHorzPercent)
+            .replace(/#2/, o.scaleVertPercent)
+            .replace(/#3/, o.scaleHorzPercent / 100)
+            .replace(/#4/, o.scaleVertPercent / 100)
+            .replace(/#5/, o.moveHorzPts)
+            .replace(/#6/, -o.moveVertPts)
+            .replace(/#7/, o.rotateDegrees)
+            .replace(/#8/, o.rotateDegrees * Math.PI / 180)
+            .replace(/#9/, o.numberOfCopies)
+            .replace(/#10/, o.transformPointIndex)
+            .replace(/#11/, o.scaleStrokes ? 1 : 0)
+            .replace(/#12/, o.transformPatterns ? 1 : 0)
+            .replace(/#13/, o.transformObjects ? 1 : 0)
+            .replace(/#14/, o.reflectX ? 1 : 0)
+            .replace(/#15/, o.reflectY ? 1 : 0)
+            .replace(/#16/, o.randomize ? 1 : 0);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -787,18 +769,17 @@ function LE_Tweak(item, options) {
             tweakAnchorPoints: true,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Scribble and Tweak"><Dict data="R horz #1 R vert #2 R ahor #3 R aver #4 R absoluteness #5 B in #6 B out #7 B anch #8 "/></LiveEffect>'
-                .replace(/#1/, amountH)
-                .replace(/#2/, amountV)
-                .replace(/#3/, amountH)
-                .replace(/#4/, amountV)
-                .replace(/#5/, Number(absoluteness))
-                .replace(/#6/, tweakInPoints ? 1 : 0)
-                .replace(/#7/, tweakOutPoints ? 1 : 0)
-                .replace(/#8/, tweakAnchorPoints ? 1 : 0);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Scribble and Tweak"><Dict data="R horz #1 R vert #2 R ahor #3 R aver #4 R absoluteness #5 B in #6 B out #7 B anch #8 "/></LiveEffect>'
+            .replace(/#1/, o.amountH)
+            .replace(/#2/, o.amountV)
+            .replace(/#3/, o.amountH)
+            .replace(/#4/, o.amountV)
+            .replace(/#5/, Number(o.absoluteness))
+            .replace(/#6/, o.tweakInPoints ? 1 : 0)
+            .replace(/#7/, o.tweakOutPoints ? 1 : 0)
+            .replace(/#8/, o.tweakAnchorPoints ? 1 : 0);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -811,11 +792,10 @@ function LE_Twist(item, options) {
             angle: 10,
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Twirl"><Dict data="R angle #1 "/></LiveEffect>'
-                .replace(/#1/, angle);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Twirl"><Dict data="R angle #1 "/></LiveEffect>'
+            .replace(/#1/, o.angle);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -842,17 +822,16 @@ function LE_Warp(item, options) {
             deformVertical: 0,       /* percentage */
             expandAppearance: false
         };
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var warpName = ['Arc', 'ArcLower', 'ArcUpper', 'Arch', 'Bulge', 'ShellLower', 'ShellUpper', 'Flag', 'Wave', 'Fish', 'Rise', 'FishEye', 'Inflate', 'Squeeze', 'Twist'][warpType];
-            var xml = '<LiveEffect name="Adobe Deform"><Dict data="S DisplayString Warp:#1 I DeformStyle #2 B Rotate #3 R DeformValue #4 R DeformHoriz #5 R DeformVert #6 "/></LiveEffect>'
-                .replace(/#1/, warpName)
-                .replace(/#2/, warpType + 1)
-                .replace(/#3/, isVertical ? 1 : 0)
-                .replace(/#4/, warpAmount / 100)
-                .replace(/#5/, deformHorizontal / 100)
-                .replace(/#6/, deformVertical / 100);
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        o.warpName = ['Arc', 'ArcLower', 'ArcUpper', 'Arch', 'Bulge', 'ShellLower', 'ShellUpper', 'Flag', 'Wave', 'Fish', 'Rise', 'FishEye', 'Inflate', 'Squeeze', 'Twist'][o.warpType];
+        var xml = '<LiveEffect name="Adobe Deform"><Dict data="S DisplayString Warp:#1 I DeformStyle #2 B Rotate #3 R DeformValue #4 R DeformHoriz #5 R DeformVert #6 "/></LiveEffect>'
+            .replace(/#1/, o.warpName)
+            .replace(/#2/, o.warpType + 1)
+            .replace(/#3/, o.isVertical ? 1 : 0)
+            .replace(/#4/, o.warpAmount / 100)
+            .replace(/#5/, o.deformHorizontal / 100)
+            .replace(/#6/, o.deformVertical / 100);
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
@@ -868,15 +847,14 @@ function LE_ZigZag(item, options) {
             smoothness: 0,           /* 0 or false = corners, 1 or true = smooth, 0.5 = halfway, 1.5 = too much? */
             expandAppearance: false
         }
-        with (LE.defaultsObject(item, defaults, options, arguments.callee)) {
-            var xml = '<LiveEffect name="Adobe Zigzag"><Dict data="R amount #1 R relAmount #2 R absoluteness #3 R ridges #4 R roundness #5 "/></LiveEffect>'
-                .replace(/#1/, amount)
-                .replace(/#2/, amount)
-                .replace(/#3/, Number(absoluteness))
-                .replace(/#4/, ridgesPerSegment)
-                .replace(/#5/, Number(smoothness));
-            LE.applyEffect(item, xml, expandAppearance);
-        }
+        var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        var xml = '<LiveEffect name="Adobe Zigzag"><Dict data="R amount #1 R relAmount #2 R absoluteness #3 R ridges #4 R roundness #5 "/></LiveEffect>'
+            .replace(/#1/, o.amount)
+            .replace(/#2/, o.amount)
+            .replace(/#3/, Number(o.absoluteness))
+            .replace(/#4/, o.ridgesPerSegment)
+            .replace(/#5/, Number(o.smoothness));
+        LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
