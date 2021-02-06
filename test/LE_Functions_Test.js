@@ -1,4 +1,4 @@
-//@include 'LE_Functions.js'
+//@include '../scripts/LE_Functions.js'
 
 /*
 
@@ -22,7 +22,7 @@
 function getTestList() {
     /* current tests each function with defaults (empty options) */
     return [
-        { func: LE_3DEffect, options: {}, expectedXML: '<LiveEffect name="Adobe 3D Effect"><Dict data="R mat_00 0.9181605881972 R mat_01 0.12903903658077 R mat_02 0.374606542014 R mat_03 0 R mat_10 0.00992534262237 R mat_11 0.93769075518751 R mat_12 -0.3473291453502 R mat_13 0 R mat_20 -0.3960841095717 R mat_21 0.32262203067084 R mat_22 0.85966993868032 R mat_23 0 R mat_30 0 R mat_31 0 R mat_32 0 R mat_33 1 I effectStyle 0 R rotX -22 R rotY -22 R rotZ 8 R cameraPerspective 0 R extrudeDepth 100 R surfaceAmbient 70 I shadeMode 2 I surfaceStyle 3 R surfaceMatte 40 R surfaceGloss 10 R blendSteps 25 B preserveSpots 0 B extrudeCap 1 R revolveAngle 360 R revolveOffset 0 B revolveCap 1 I revolveAxisMode 0 R bevelHeight 4 B bevelExtentIn 1 B shadeMaps 0 B showHiddenSurfaces 0 B invisibleGeo 0 I numArtMaps 0 I 3Dversion 2 B paramsDictionaryInitialized 1 I numLights 1 "><Entry name="shadeColor" valueType="F"><Fill color="5 0 0 0"/></Entry><Entry name="light0" valueType="D"><Dict data="R lightIntensity 1 R lightDirX -0.99 R lightDirY 0 R lightDirZ -1 R lightPosX 0 R lightPosY 0 R lightPosZ -1 " /></Entry><Entry name="DisplayString" value="3D: BevelAndExtrude" valueType="S"/></Dict></LiveEffect>' },
+        { func: LE_3DEffect, options: {}, expectedXML: '<LiveEffect name="Adobe 3D Effect"><Dict data="R mat_00 0.9181605881972 R mat_01 0.12903903658077 R mat_02 0.374606542014 R mat_03 0 R mat_10 0.00992534262237 R mat_11 0.93769075518751 R mat_12 -0.3473291453502 R mat_13 0 R mat_20 -0.3960841095717 R mat_21 0.32262203067084 R mat_22 0.85966993868032 R mat_23 0 R mat_30 0 R mat_31 0 R mat_32 0 R mat_33 1 I effectStyle 0 R rotX -22 R rotY -22 R rotZ 8 R cameraPerspective 0 R extrudeDepth 100 R surfaceAmbient 70 I shadeMode 2 I surfaceStyle 3 R surfaceMatte 40 R surfaceGloss 10 R blendSteps 25 B preserveSpots 0 B extrudeCap 1 R revolveAngle 360 R revolveOffset 0 B revolveCap 1 I revolveAxisMode 0 R bevelHeight 4 B bevelExtentIn 1 B shadeMaps 0 B showHiddenSurfaces 0 B invisibleGeo 0 I numArtMaps 0 I 3Dversion 2 B paramsDictionaryInitialized 1 I numLights 1 "><Entry name="shadeColor" valueType="F"><Fill color="5 0 0 0"/></Entry><Entry name="light0" valueType="D"><Dict data="R lightIntensity 1 R lightDirX -0.99 R lightDirY 0 R lightDirZ -1 R lightPosX 0 R lightPosY 0 R lightPosZ -1 " /></Entry><Entry name="DisplayString" value="3D: Bevel & Extrude" valueType="S"/></Dict></LiveEffect>' },
         { func: LE_ConvertToShape, options: {}, expectedXML: '<LiveEffect name="Adobe Shape Effects"><Dict data="U DisplayString Rectangle I Shape 0 R RelWidth 0 R RelHeight 0 R AbsWidth 0 R AbsHeight 0 R Absolute 0 R CornerRadius 9 "/></LiveEffect>' },
         { func: LE_CropMarks, options: {}, expectedXML: '<LiveEffect name="Adobe Trim Marks"><Dict data="I styl 0 "/></LiveEffect>' },
         { func: LE_DropShadow, options: {}, expectedXML: '<LiveEffect name="Adobe Drop Shadow"><Dict data="I blnd 1 R opac 0.75 R horz 7 R vert 7 R blur 5 B usePSLBlur 1 I csrc 0 R dark 100 B pair 1 "><Entry name="sclr" valueType="F"><Fill color="5 0 0 0"/></Entry></Dict></LiveEffect>' },
@@ -44,7 +44,7 @@ function getTestList() {
         { func: LE_Transform, options: {}, expectedXML: '<LiveEffect name="Adobe Transform"><Dict data="R scaleH_Percent 100 R scaleV_Percent 100 R scaleH_Factor 1 R scaleV_Factor 1 R moveH_Pts 0 R moveV_Pts 0 R rotate_Degrees 0 R rotate_Radians 0 I numCopies 0 I pinPoint 4 B scaleLines 0 B transformPatterns 1 B transformObjects 1 B reflectX 0 B reflectY 0 B randomize 0 "/></LiveEffect>' },
         { func: LE_Tweak, options: {}, expectedXML: '<LiveEffect name="Adobe Scribble and Tweak"><Dict data="R horz 10 R vert 10 R ahor 10 R aver 10 R absoluteness 0 B in 1 B out 1 B anch 1 "/></LiveEffect>' },
         { func: LE_Twist, options: {}, expectedXML: '<LiveEffect name="Adobe Twirl"><Dict data="R angle 10 "/></LiveEffect>' },
-        { func: LE_Warp, options: {}, expectedXML: '<LiveEffect name="Adobe Deform"><Dict data="S DisplayString Warp:ArcLower I DeformStyle 1 B Rotate 0 R DeformValue 0.5 R DeformHoriz 0 R DeformVert 0 "/></LiveEffect>' },
+        { func: LE_Warp, options: {}, expectedXML: '<LiveEffect name="Adobe Deform"><Dict data="S DisplayString Warp:Arc I DeformStyle 1 B Rotate 0 R DeformValue 0.5 R DeformHoriz 0 R DeformVert 0 "/></LiveEffect>' },
         { func: LE_ZigZag, options: {}, expectedXML: '<LiveEffect name="Adobe Zigzag"><Dict data="R amount 10 R relAmount 10 R absoluteness 1 R ridges 4 R roundness 0 "/></LiveEffect>' }
     ];
 }
@@ -66,8 +66,13 @@ function LE_TestGeneratedXML() {
     var failureList = [];
     for (var i = 0; i < LE.testResults.length; i++) {
         LE.testResults[i].pass = LE.testResults[i].xml === functionsToTest[i].expectedXML;
+        LE.testResults[i].expected = functionsToTest[i].expectedXML;
         $.writeln('LE.testResults[' + i + '] = ' + LE.testResults[i].functionName + ' ' + (LE.testResults[i].pass ? 'passed.' : 'FAILED!'));
-        if (!LE.testResults[i].pass) failureList.push(LE.testResults[i].functionName);
+        if (!LE.testResults[i].pass) {
+            failureList.push(LE.testResults[i].functionName);
+            $.writeln('  generated: ' + LE.testResults[i].xml);
+            $.writeln('   expected: ' + functionsToTest[i].expectedXML);
+        }
     }
     if (failureList.length > 0) {
         // show failures
