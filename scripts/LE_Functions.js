@@ -383,7 +383,7 @@ function LE_FreeDistort(item, options) {
             expandAppearance: false
         }
         var o = LE.defaultsObject(item, defaults, options, arguments.callee)
-        var xml = '<LiveEffect name="Adobe Free o.Distort"><Dict data="R src0h #1 R src0v #2 R src1h #3 R src1v #4 R src2h #5 R src2v #6 R src3h #7 R src3v #8 R dst0h #9 R dst0v #10 R dst1h #11 R dst1v #12 R dst2h #13 R dst2v #14 R dst3h #15 R dst3v #16 "/></LiveEffect>'
+        var xml = '<LiveEffect name="Adobe Free Distort"><Dict data="R src0h #1 R src0v #2 R src1h #3 R src1v #4 R src2h #5 R src2v #6 R src3h #7 R src3v #8 R dst0h #9 R dst0v #10 R dst1h #11 R dst1v #12 R dst2h #13 R dst2v #14 R dst3h #15 R dst3v #16 "/></LiveEffect>'
             .replace(/#1/, o.sourceRect[0][0])
             .replace(/#2/, -o.sourceRect[0][1])
             .replace(/#3/, o.sourceRect[1][0])
@@ -483,7 +483,7 @@ function LE_OuterGlow(item, options) {
             .replace(/#2/, o.opacity)
             .replace(/#3/, o.blur)
             .replace(/#4/, o.usePSLBlur ? 1 : 0)
-            .replace(/#5/, LE.formatColor(shadowColor));
+            .replace(/#5/, LE.formatColor(o.shadowColor));
         LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
