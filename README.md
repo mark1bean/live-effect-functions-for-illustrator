@@ -1,4 +1,4 @@
-# AI Live Effects Functions
+# Live Effects Functions for Illustrator
 
 A set of ExtendScript convenience functions for applying Live Effects in Adobe Illustrator.
 
