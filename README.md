@@ -1,4 +1,4 @@
-# AI Live Effects Functions
+# Live Effects Functions for Illustrator
 
 A set of ExtendScript convenience functions for applying Live Effects in Adobe Illustrator.
 
@@ -11,12 +11,12 @@ My aim with these functions is to hide away all that esoteric complication behin
 ---
 ## Important note
 
-Some of the Live Effects functions simply don't work right, probably due to my lack of knowledge. See my [notes document](https://mark1bean.github.io/ai-live-effect-functions/) for the status of each function. Any help or improvements welcome!
+Some of the Live Effects functions simply don't work right, probably due to my lack of knowledge. See my [notes document](https://mark1bean.github.io/live-effect-functions-for-illustrator/) for the status of each function. Any help or improvements welcome!
 
 ---
 ## Installation
 
-Download the [script files](https://github.com/mark1bean/ai-live-effect-functions/archive/master.zip) and use the LE functions in your own scripts.
+Download the [script files](https://mark1bean.github.io/live-effect-functions-for-illustrator/archive/master.zip) and use the LE functions in your own scripts.
 
 > Each function in `LE_Functions.js` relies on `LE.js`, so you'll need both files.
 
