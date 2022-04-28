@@ -116,5 +116,15 @@ var LE = {
         Transformation.TOPLEFT, Transformation.TOP, Transformation.TOPRIGHT,
         Transformation.LEFT, Transformation.CENTER, Transformation.RIGHT,
         Transformation.BOTTOMLEFT, Transformation.BOTTOM, Transformation.BOTTOMRIGHT
-    ]
+    ],
+
+    divideFix: function (item) {
+        /*
+            adds a PathFinder Divide Live Effect prior to another
+            PathFinder Live Effect to fix an AI bug where PathFinder
+            Live Effect is is applied AFTER group contents
+        */
+        LE_PathFinder(item, { command: 5 })
+    }
+
 }

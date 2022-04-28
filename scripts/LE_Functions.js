@@ -529,6 +529,10 @@ function LE_PathFinder_MinusFront(item, options) {
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_PathFinder(item, options) {
+    /*
+        NOTE: commands 2, 4 and 9 do not work and must be fixed
+        manually by moving the order of the effect in Appearance Panel
+    */
     try {
         var defaults = {
             command: 0,                 /* 0 = Add, 1 = Intersect, 2 = Exclude, 3 = Minus Front (Subtract),
@@ -546,9 +550,19 @@ function LE_PathFinder(item, options) {
             trapThickness: 0.25,        /* trap command only */
             trapTint: 0.4,              /* trap command only */
             trapTintTolerance: 0.05,    /* trap command only */
+            divideFix: undefined,       /* set to -1 to switch off. See LE.divideFix for explanation */
             expandAppearance: false
         }
         var o = LE.defaultsObject(item, defaults, options, arguments.callee)
+        if (o.divideFix != -1) {
+            // set divideFix depending on command (only some need it)
+            if (o.command == 0 || o.command == 1 || o.command == 3) {
+                o.divideFix = true;
+                // to mimic "Intersect", apply Divide, then Minus Back
+                if (o.command == 1)
+                    o.command = 4;
+            }
+        }
         o.display = ['Add', 'Intersect', 'Exclude', 'Minus Front', 'Minus Back', 'Divide', 'Outline', 'Trim', 'Merge', 'Crop', 'Hard Mix', 'Soft Mix', 'Trap'][o.command];
         var xml = '<LiveEffect name="Adobe Pathfinder"><Dict data="I Command #1 B ConvertCustom #2 B ExtractUnpainted #3 R Mix #4 R Precision #5 B RemovePoints #6 R TrapAspect #7 B TrapConvertCustom #8 R TrapMaxTint #9 B TrapReverse #10 R TrapThickness #11 R TrapTint #12 R TrapTintTolerance #13"><Entry name="DisplayString" value="#14" valueType="S"/></Dict></LiveEffect>'
             .replace(/#1/, o.command)
@@ -565,6 +579,8 @@ function LE_PathFinder(item, options) {
             .replace(/#12/, o.trapTint)
             .replace(/#13/, o.trapTintTolerance)
             .replace(/#14/, o.display);
+        if (o.divideFix == true)
+            LE.divideFix(item);
         LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
@@ -806,6 +822,14 @@ function LE_Warp_Arch(item, options) {
     /* example customization of LE_Warp */
     if (options == undefined || typeof options != 'object') options = {};
     options.warpType = 3;
+    LE_Warp(item, options);
+}
+
+/* -------------------------------------------------------------------------------------------- */
+function LE_Warp_Wave(item, options) {
+    /* example customization of LE_Warp */
+    if (options == undefined || typeof options != 'object') options = {};
+    options.warpType = 8;
     LE_Warp(item, options);
 }
 
