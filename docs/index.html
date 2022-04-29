@@ -15,7 +15,7 @@
             font-size: 30px;
         }
 
-        h1 + p {
+        h1+p {
             padding-bottom: 20px;
         }
 
@@ -120,7 +120,8 @@
 </head>
 
 <body>
-    <h1><a style="text-decoration: none;" href="https://github.com/mark1bean/ai-live-effect-functions">AI Live Effects functions</a></h1>
+    <h1><a style="text-decoration: none;" href="https://github.com/mark1bean/ai-live-effect-functions">AI Live Effects
+            functions</a></h1>
 
     <p>What worked and what didn't:
         <span class='status-indicator good'>&checkmark;</span> works fine.
@@ -265,21 +266,17 @@
                 <td>LE_OutlineStroke</td>
                 <td></td>
             </tr>
-            <tr class="status-indicator half">
+            <tr class="status-indicator good">
                 <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Add</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 0 } <span class="emoji">&#128542;</span> fill and stroke are overridden
-                    (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but expandAppearance works on
-                    geometry</td>
+                <td>{ command: 0 } (<a href="#issue1">issue 1</a> fixed by KurtGold's solution)</td>
             </tr>
-            <tr class="status-indicator half">
+            <tr class="status-indicator good">
                 <td class="symbol">&checkmark;</td>
                 <td>Pathfinder &gt; Intersect</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 1 } <span class="emoji">&#128542;</span> fill and stroke are overridden
-                    (<a href="#issue1">issue 1</a>) <span class="emoji">&#128579;</span> but expandAppearance works on
-                    geometry</td>
+                <td>{ command: 1 } (<a href="#issue1">issue 1</a> fixed by KurtGold's solution)</td>
             </tr>
             <tr class="status-indicator bad">
                 <td class="symbol">&cross;</td>
@@ -288,12 +285,11 @@
                 <td>{ command: 2 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
                 </td>
             </tr>
-            <tr class="status-indicator bad">
+            <tr class="status-indicator good">
                 <td class="symbol">&cross;</td>
                 <td>Pathfinder &gt; Subtract</td>
                 <td>LE_PathFinder</td>
-                <td>{ command: 3 } <span class="emoji">&#128542;</span> doesn't work (<a href="#issue1">issue 1</a>)
-                </td>
+                <td>{ command: 3 } (<a href="#issue1">issue 1</a> fixed by KurtGold's solution)</td>
             </tr>
             <tr class="status-indicator bad">
                 <td class="symbol">&cross;</td>
@@ -846,6 +842,8 @@
             However some effects need to be placed at the <em>beginning</em>, before the stroke and fill. In other
             respects the live effect is correctly applied, so that manually moving it from the bottom to the top of the
             Appearance Panel resolves the problem completely. Sadly, this makes automation useless!</p>
+        <p>Thanks to KurtGold at Adobe Support Community for working out how to fix PathFinder Add, Intersect and
+            MinusFront, by adding a Pathfinder Divide Live Effect first.</p>
         <h5 id="issue2">Issue 2:</h5>
         <p>With the happy exception of Gaussian Blur, all the PS effects encode their parameters in an ascii85 string,
             accompanied by a dataSize property. that I haven't been able to usefully decode using free tools.
