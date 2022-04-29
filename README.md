@@ -20,9 +20,9 @@ Some of the Live Effects functions simply don't work right, probably due to my l
 
 ## Installation
 
-Download the [script files](https://mark1bean.github.io/live-effect-functions-for-illustrator/archive/master.zip) and use the LE functions in your own scripts.
+Download the [latest release](https://github.com/mark1bean/live-effect-functions-for-illustrator/releases/latest/download/live-effect-functions-for-illustrator.zip) and add `//@include LE_Functions.js` to the beginning of your own script. Look through the LE_Function.js file and read the Usage section below.
 
-> Each function in `LE_Functions.js` relies on `LE.js`, so you'll need both files.
+> Note: `LE_Functions.js` and `LE.js` must be in same folder.
 
 ---
 
