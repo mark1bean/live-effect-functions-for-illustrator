@@ -108,6 +108,6 @@ Adobe Illustrator CS6 and above. As of 2021-01-25, tested only on version 25 (Ma
 
 ## Acknowledgements
 
-Thanks to lots of help and encouragement from CarlosCanto, Silly-V, femkeblanco and KurtGold at [community.adobe.com](https://community.adobe.com)
+Thanks to lots of help and encouragement from CarlosCanto, Silly-V, femkeblanco, KurtGold and sttk3 at [community.adobe.com](https://community.adobe.com)
 
 Thanks to the contributors at [gl-mat4](https://github.com/stackgl/gl-mat4) where I found some excellent 3D matrix functions that saved me a lot of time.
