@@ -1,11 +1,15 @@
 //@include 'LE.js'
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_3DBevelAndExtrude(item, options) {
     if (options == undefined || typeof options != 'object') options = {};
     options.effectType = 0;
     LE_3DEffect(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_3DRevolve(item, options) {
@@ -14,6 +18,8 @@ function LE_3DRevolve(item, options) {
     LE_3DEffect(item, options);
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_3DRotate(item, options) {
     if (options == undefined || typeof options != 'object') options = {};
@@ -21,6 +27,8 @@ function LE_3DRotate(item, options) {
     if (options.surfaceStyle == undefined) options.surfaceStyle = 2;
     LE_3DEffect(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_3DEffect(item, options) {
@@ -227,6 +235,8 @@ function LE_3DEffect(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_ConvertToShape_Rectangle(item, options) {
     /* example customization of LE_ConvertToShape */
@@ -234,6 +244,8 @@ function LE_ConvertToShape_Rectangle(item, options) {
     options.shapeType = 0; // rectange
     LE_ConvertToShape(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_ConvertToShape_RoundedRectangle(item, options) {
@@ -243,6 +255,8 @@ function LE_ConvertToShape_RoundedRectangle(item, options) {
     LE_ConvertToShape(item, options);
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_ConvertToShape_Ellipse(item, options) {
     /* example customization of LE_ConvertToShape */
@@ -251,10 +265,10 @@ function LE_ConvertToShape_Ellipse(item, options) {
     LE_ConvertToShape(item, options);
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_ConvertToShape(item, options) {
-    // note: this function messes up the item's appearance!
-    // to manually fix: in Appeance panel, drag effect above Stroke and Fill
     try {
         var defaults = {
             shapeType: 0,          /* 0 = rectangle, 1 = rounded rectangle, 2 = ellipse */
@@ -270,7 +284,7 @@ function LE_ConvertToShape(item, options) {
             o.widthPts = o.widthPts || 100;
             o.heightPts = o.heightPts || 100;
         }
-        var xml = '<LiveEffect name="Adobe Shape Effects"><Dict data="U DisplayString #1 I Shape #2 R RelWidth #3 R RelHeight #4 R AbsWidth #5 R AbsHeight #6 R Absolute #7 R CornerRadius #8 "/></LiveEffect>'
+        var xml = '<LiveEffect name="Adobe Shape Effects" isPre="1"><Dict data="U DisplayString #1 I Shape #2 R RelWidth #3 R RelHeight #4 R AbsWidth #5 R AbsHeight #6 R Absolute #7 R CornerRadius #8 "/></LiveEffect>'
             .replace(/#1/, o.shapeName)
             .replace(/#2/, o.shapeType)
             .replace(/#3/, o.widthPts)
@@ -284,6 +298,8 @@ function LE_ConvertToShape(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_CropMarks(item, options) {
@@ -301,6 +317,8 @@ function LE_CropMarks(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_DropShadow(item, options) {
@@ -336,6 +354,8 @@ function LE_DropShadow(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_Feather(item, options) {
     try {
@@ -352,6 +372,8 @@ function LE_Feather(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_FreeDistort_Random(item, options) {
     /* example customization - move each point by a random amount */
@@ -362,6 +384,8 @@ function LE_FreeDistort_Random(item, options) {
     function r() { return Math.random() * options.variance - (options.variance / 2); }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_FreeDistort_Twist(item, options) {
     /* example customization - swap the bottom two points around */
@@ -369,6 +393,8 @@ function LE_FreeDistort_Twist(item, options) {
     options.distortRect = [[0, 0], [1, 0], [1, 1], [0, 1]];  /* [ TL, TR, BL, BR ] */
     LE_FreeDistort(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_FreeDistort(item, options) {
@@ -406,6 +432,8 @@ function LE_FreeDistort(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_GaussianBlur(item, options) {
     try {
@@ -421,6 +449,8 @@ function LE_GaussianBlur(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_InnerGlow(item, options) {
@@ -446,6 +476,8 @@ function LE_InnerGlow(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_OffsetPath(item, options) {
     try {
@@ -465,6 +497,8 @@ function LE_OffsetPath(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_OuterGlow(item, options) {
@@ -490,6 +524,8 @@ function LE_OuterGlow(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_OutlineObject(item, options) {
     try {
@@ -503,6 +539,8 @@ function LE_OutlineObject(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_OutlineStroke(item, options) {
@@ -518,6 +556,8 @@ function LE_OutlineStroke(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_PathFinder_MinusFront(item, options) {
     /* example customization of LE_PathFinder */
@@ -527,12 +567,10 @@ function LE_PathFinder_MinusFront(item, options) {
     LE_PathFinder(item, options);
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_PathFinder(item, options) {
-    /*
-        NOTE: commands 2, 4 and 9 do not work and must be fixed
-        manually by moving the order of the effect in Appearance Panel
-    */
     try {
         var defaults = {
             command: 0,                 /* 0 = Add, 1 = Intersect, 2 = Exclude, 3 = Minus Front (Subtract),
@@ -550,21 +588,11 @@ function LE_PathFinder(item, options) {
             trapThickness: 0.25,        /* trap command only */
             trapTint: 0.4,              /* trap command only */
             trapTintTolerance: 0.05,    /* trap command only */
-            divideFix: undefined,       /* set to -1 to switch off. See LE.divideFix for explanation */
             expandAppearance: false
         }
         var o = LE.defaultsObject(item, defaults, options, arguments.callee)
-        if (o.divideFix != -1) {
-            // set divideFix depending on command (only some need it)
-            if (o.command == 0 || o.command == 1 || o.command == 3) {
-                o.divideFix = true;
-                // to mimic "Intersect", apply Divide, then Minus Back
-                if (o.command == 1)
-                    o.command = 4;
-            }
-        }
         o.display = ['Add', 'Intersect', 'Exclude', 'Minus Front', 'Minus Back', 'Divide', 'Outline', 'Trim', 'Merge', 'Crop', 'Hard Mix', 'Soft Mix', 'Trap'][o.command];
-        var xml = '<LiveEffect name="Adobe Pathfinder"><Dict data="I Command #1 B ConvertCustom #2 B ExtractUnpainted #3 R Mix #4 R Precision #5 B RemovePoints #6 R TrapAspect #7 B TrapConvertCustom #8 R TrapMaxTint #9 B TrapReverse #10 R TrapThickness #11 R TrapTint #12 R TrapTintTolerance #13"><Entry name="DisplayString" value="#14" valueType="S"/></Dict></LiveEffect>'
+        var xml = '<LiveEffect name="Adobe Pathfinder" isPre="1"><Dict data="I Command #1 B ConvertCustom #2 B ExtractUnpainted #3 R Mix #4 R Precision #5 B RemovePoints #6 R TrapAspect #7 B TrapConvertCustom #8 R TrapMaxTint #9 B TrapReverse #10 R TrapThickness #11 R TrapTint #12 R TrapTintTolerance #13"><Entry name="DisplayString" value="#14" valueType="S"/></Dict></LiveEffect>'
             .replace(/#1/, o.command)
             .replace(/#2/, o.convertCustom ? 1 : 0)
             .replace(/#3/, o.removeUnpainted ? 1 : 0)
@@ -579,13 +607,13 @@ function LE_PathFinder(item, options) {
             .replace(/#12/, o.trapTint)
             .replace(/#13/, o.trapTintTolerance)
             .replace(/#14/, o.display);
-        if (o.divideFix == true)
-            LE.divideFix(item);
         LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_PuckerAndBloat(item, options) {
@@ -602,6 +630,8 @@ function LE_PuckerAndBloat(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Rasterize(item, options) {
@@ -629,6 +659,8 @@ function LE_Rasterize(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_Roughen(item, options) {
     try {
@@ -652,6 +684,8 @@ function LE_Roughen(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_RoundCorners(item, options) {
     try {
@@ -667,6 +701,8 @@ function LE_RoundCorners(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Scribble(item, options) {
@@ -698,6 +734,8 @@ function LE_Scribble(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_SVGFilter_Static(item, options) {
     /* example customization of LE_SVGFilter */
@@ -705,6 +743,8 @@ function LE_SVGFilter_Static(item, options) {
     options.filterName = 'AI_Static';
     LE_SVGFilter(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_SVGFilter(item, options) {
@@ -722,6 +762,8 @@ function LE_SVGFilter(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Transform(item, options) {
@@ -773,6 +815,8 @@ function LE_Transform(item, options) {
     }
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_Tweak(item, options) {
     try {
@@ -783,10 +827,11 @@ function LE_Tweak(item, options) {
             tweakInPoints: true,
             tweakOutPoints: true,
             tweakAnchorPoints: true,
+            tweakSeparately: false,  /* tweak Fill and Stroke separately */
             expandAppearance: false
         }
         var o = LE.defaultsObject(item, defaults, options, arguments.callee)
-        var xml = '<LiveEffect name="Adobe Scribble and Tweak"><Dict data="R horz #1 R vert #2 R ahor #3 R aver #4 R absoluteness #5 B in #6 B out #7 B anch #8 "/></LiveEffect>'
+        var xml = '<LiveEffect name="Adobe Scribble and Tweak" isPre="#9"><Dict data="R horz #1 R vert #2 R ahor #3 R aver #4 R absoluteness #5 B in #6 B out #7 B anch #8 "/></LiveEffect>'
             .replace(/#1/, o.amountH)
             .replace(/#2/, o.amountV)
             .replace(/#3/, o.amountH)
@@ -794,12 +839,15 @@ function LE_Tweak(item, options) {
             .replace(/#5/, Number(o.absoluteness))
             .replace(/#6/, o.tweakInPoints ? 1 : 0)
             .replace(/#7/, o.tweakOutPoints ? 1 : 0)
-            .replace(/#8/, o.tweakAnchorPoints ? 1 : 0);
+            .replace(/#8/, o.tweakAnchorPoints ? 1 : 0)
+            .replace(/#9/, o.tweakSeparately ? 0 : 1);
         LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Twist(item, options) {
@@ -809,13 +857,15 @@ function LE_Twist(item, options) {
             expandAppearance: false
         }
         var o = LE.defaultsObject(item, defaults, options, arguments.callee)
-        var xml = '<LiveEffect name="Adobe Twirl"><Dict data="R angle #1 "/></LiveEffect>'
+        var xml = '<LiveEffect name="Adobe Twirl" isPre="1"><Dict data="R angle #1 "/></LiveEffect>'
             .replace(/#1/, o.angle);
         LE.applyEffect(item, xml, o.expandAppearance);
     } catch (error) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Warp_Arch(item, options) {
@@ -825,6 +875,8 @@ function LE_Warp_Arch(item, options) {
     LE_Warp(item, options);
 }
 
+
+
 /* -------------------------------------------------------------------------------------------- */
 function LE_Warp_Wave(item, options) {
     /* example customization of LE_Warp */
@@ -832,6 +884,8 @@ function LE_Warp_Wave(item, options) {
     options.warpType = 8;
     LE_Warp(item, options);
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_Warp(item, options) {
@@ -860,6 +914,8 @@ function LE_Warp(item, options) {
         LE.handleError(error);
     }
 }
+
+
 
 /* -------------------------------------------------------------------------------------------- */
 function LE_ZigZag(item, options) {
