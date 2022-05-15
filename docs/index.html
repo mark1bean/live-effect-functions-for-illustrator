@@ -206,7 +206,7 @@
                 <td class="symbol">&checkmark;</td>
                 <td>Distort &amp; Transform &gt; Roughen</td>
                 <td>LE_Roughen</td>
-                <td>can accept a Real number for smoothness value!</td>
+                <td>Can accept a Real number for smoothness value!</td>
             </tr>
             <tr class="status-indicator good">
                 <td class="symbol">&checkmark;</td>
@@ -818,13 +818,7 @@
     </table>
     <div>
         <h5 id="issue1">Issue 1:</h5>
-        <p>The applyEffect() method puts the live effect at the <em>end</em> of the Appearance, after the
-            stroke and fill.
-            However some effects need to be placed at the <em>beginning</em>, before the stroke and fill. In other
-            respects the live effect is correctly applied, so that manually moving it from the bottom to the top of the
-            Appearance Panel resolves the problem completely. Sadly, this makes automation useless!</p>
-        <p>Thanks to KurtGold at Adobe Support Community for working out how to fix PathFinder Add, Intersect and
-            MinusFront, by adding a Pathfinder Divide Live Effect first.</p>
+        <p>Thanks to sttk3 at Adobe Support Community, this issue is solved by adding isPre="1" to force the effect <em>before</em> the item contents</p>
         <h5 id="issue2">Issue 2:</h5>
         <p>With the happy exception of Gaussian Blur, all the PS effects encode their parameters in an ascii85 string,
             accompanied by a dataSize property. that I haven't been able to usefully decode using free tools.
