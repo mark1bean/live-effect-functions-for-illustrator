@@ -1,12 +1,21 @@
+/*
+    LE - Helper object for Live Effect scripts
+*/
+
 var LE = {
-    /* helper object for Live Effect scripts */
     functionName: 'LE',
     testMode: false,
     debug: false,
     defaults: {},
 
+    /**
+     * Combines defaults and user-specified options along with a little admin work
+     * @param {(PageItem|PageItems)} item - A PageItem or collection or array of PageItems
+     * @param {Object} defaults - Object with default properties
+     * @param {Object} options - Object with user supplied properties
+     * @param {Function} func - The LE_Function
+     */
     defaultsObject: function (item, defaults, options, func) {
-        /* combines defaults and user-specified options along with a little admin work */
         LE.functionName = func.name;
         try {
             if (defaults == undefined && options == undefined) return {};
@@ -23,8 +32,14 @@ var LE = {
         }
     },
 
+
+    /**
+     * Applies the Live Effect, unless in test mode
+     * @param {(PageItem|PageItems)} item - A PageItem or collection or array of PageItems
+     * @param {String} xml - The Live Effect XML to apply
+     * @param {Boolean} expand - Perform Expand Appearance
+     */
     applyEffect: function (item, xml, expand) {
-        /* applies the live effect, unless in test mode */
         if (LE.testMode) {
             LE.testResults.push({ timestamp: new Date(), functionName: LE.functionName, xml: xml });
             return xml;
@@ -48,20 +63,30 @@ var LE = {
         }
     },
 
+    /**
+     * Handles error
+     * @param {Error} error - a javascript Error
+     */
     handleError: function (error) {
-        /* called when errors happen */
         alert(error.message);
     },
 
+    /**
+     * Performs Expand Appearance
+     * @param {PageItem} item - a PageItem
+     */
     expandAppearance: function (item) {
         app.redraw();
         app.executeMenuCommand('expandStyle');
         item = app.activeDocument.selection[0];
     },
 
+
+    /**
+     * Converts various color formats for live effect style color
+     * @param {(CMYKColor|RGBColor|Array|String)} colr - can be CMYKColor or [100,100,100,50] or '100 100 100 50', RGBColor or [255,255,128] or '255 255 128' or '100% 100% 50%', GrayColor or [100] or '100'
+     */
     formatColor: function (colr) {
-        /* converts various color formats for live effect style color */
-        // colr can be supplied as CMYKColor or [100,100,100,50] or '100 100 100 50', RGBColor or [255,255,128] or '255 255 128' or '100% 100% 50%', GrayColor or [100] or '100'
         if (colr == undefined) throw new Error(LE.functionName + ': No color available');
         var colorCode, breakdown;
         if (typeof colr == 'string') {
@@ -112,19 +137,13 @@ var LE = {
         return [colorCode].concat(breakdown).join(' ');
     },
 
+    /**
+     * "Map" of transform points.
+     */
     transformPoints: [
         Transformation.TOPLEFT, Transformation.TOP, Transformation.TOPRIGHT,
         Transformation.LEFT, Transformation.CENTER, Transformation.RIGHT,
         Transformation.BOTTOMLEFT, Transformation.BOTTOM, Transformation.BOTTOMRIGHT
-    ],
-
-    divideFix: function (item) {
-        /*
-            adds a PathFinder Divide Live Effect prior to another
-            PathFinder Live Effect to fix an AI bug where PathFinder
-            Live Effect is is applied AFTER group contents
-        */
-        LE_PathFinder(item, { command: 5 })
-    }
+    ]
 
 }
