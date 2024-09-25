@@ -77,6 +77,7 @@ var LE = {
      */
     expandAppearance: function (item) {
         app.redraw();
+        app.activeDocument.selection = [item];
         app.executeMenuCommand('expandStyle');
         item = app.activeDocument.selection[0];
     },
